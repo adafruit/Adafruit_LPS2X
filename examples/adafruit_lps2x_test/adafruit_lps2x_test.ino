@@ -12,24 +12,31 @@ void setup(void) {
   Serial.println("Adafruit LPS2X test!");
 
   // Try to initialize!
-  if (! lps.begin()) {
+  if (!lps.begin_I2C()) {
+  //if (!lps.begin_SPI(LPS_CS)) {
+  //if (!lps.begin_SPI(LPS_CS, LPS_SCK, LPS_MISO, LPS_MOSI)) {
     Serial.println("Failed to find LPS2X chip");
     while (1) { delay(10); }
   }
   Serial.println("LPS2X Found!");
 
-  //lps.setDataRate(MSA301_DATARATE_31_25_HZ);
-  //Serial.print("Data rate set to: ");
-  //switch (lps.getDataRate()) {
-  //  case MSA301_DATARATE_1_HZ: Serial.println("1 Hz"); break;
-  //  case MSA301_DATARATE_1_95_HZ: Serial.println("1.95 Hz"); break;
-  //  case MSA301_DATARATE_3_9_HZ: Serial.println("3.9 Hz"); break;
+//  lps.setDataRate(LPS2X_RATE_12_5_HZ);
+  Serial.print("Data rate set to: ");
+  switch (lps.getDataRate()) {
+    case LPS2X_RATE_ONE_SHOT: Serial.println("One Shot"); break;
+    case LPS2X_RATE_1_HZ: Serial.println("1 Hz"); break;
+    case LPS2X_RATE_7_HZ: Serial.println("7 Hz"); break;
+    case LPS2X_RATE_12_5_HZ: Serial.println("12.5 Hz"); break;
+    case LPS2X_RATE_25_HZ: Serial.println("25 Hz"); break;
 
-  //}
+  }
 }
 
 void loop() {
-  lps.read();      // get X Y and Z data at once
-
+  sensors_event_t temp;
+  sensors_event_t pressure;
+  lps.getEvent(&pressure, &temp);// get pressure
+  Serial.print("Temperature: ");Serial.print(temp.temperature);Serial.println(" degrees C");
+  Serial.print("Pressure: ");Serial.print(pressure.pressure);Serial.println(" degrees C");
   delay(100);
 }

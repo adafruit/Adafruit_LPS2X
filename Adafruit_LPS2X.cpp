@@ -163,27 +163,28 @@ void Adafruit_LPS2X::setDataRate(lps2x_rate_t new_data_rate) {
 void Adafruit_LPS2X::_read(void) {
   // get raw readings
   Adafruit_BusIO_Register pressure_data = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_TEMP_OUT_L, 2);
+      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_PRESS_OUT_XL, 3);
+
   Adafruit_BusIO_Register temp_data = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_TEMP_OUT_L, 2);
 
-  uint8_t buffer[2];
-  temp_data.read(buffer, 2);
+  uint8_t buffer[3];
 
+  temp_data.read(buffer, 2);
   int16_t raw_temp = buffer[1] << 8 | buffer[0];
+
+  pressure_data.read(buffer, 3);
+  int32_t raw_pressure = buffer[2] << 16 | buffer[1] << 8 | buffer[0];
 
   if (raw_temp & 0x8000) {
     raw_temp = raw_temp - 0xFFFF;
   }
   unscaled_temp = raw_temp;
 
-  // rawAccX = buffer[9] << 8 | buffer[8];
-  // rawAccY = buffer[11] << 8 | buffer[10];
-  // rawAccZ = buffer[13] << 8 | buffer[12];
-
-  // accX = rawAccX * accel_scale * SENSORS_GRAVITY_STANDARD / 1000;
-  // accY = rawAccY * accel_scale * SENSORS_GRAVITY_STANDARD / 1000;
-  // accZ = rawAccZ * accel_scale * SENSORS_GRAVITY_STANDARD / 1000;
+  if (raw_pressure & 0x800000) {
+    raw_pressure = raw_pressure - 0xFFFFFF;
+  }
+  unscaled_pressure = raw_pressure;
 }
 
 /**************************************************************************/
@@ -201,7 +202,7 @@ bool Adafruit_LPS2X::getEvent(sensors_event_t *pressure,
   _read();
 
   // use helpers to fill in the events
-  // fillPressureEvent(pressure, t);
+  fillPressureEvent(pressure, t);
   fillTempEvent(temp, t);
   return true;
 }
@@ -213,7 +214,7 @@ void Adafruit_LPS2X::fillPressureEvent(sensors_event_t *pressure,
   pressure->sensor_id = _sensorid_pressure;
   pressure->type = SENSOR_TYPE_PRESSURE;
   pressure->timestamp = timestamp;
-  pressure->temperature = (unscaled_pressure / 4096.0);
+  pressure->pressure = (unscaled_pressure / 4096.0);
 }
 
 void Adafruit_LPS2X::fillTempEvent(sensors_event_t *temp, uint32_t timestamp) {
