@@ -1,7 +1,14 @@
-// Basic demo for pressure readings from Adafruit LPS25
+// Basic demo for pressure readings from Adafruit LPS2X
 #include <Wire.h>
 #include <Adafruit_LPS2X.h>
 #include <Adafruit_Sensor.h>
+
+// For SPI mode, we need a CS pin
+#define LPS_CS 10
+// For software-SPI mode we need SCK/MOSI/MISO pins
+#define LPS_SCK 13
+#define LPS_MISO 12
+#define LPS_MOSI 11
 
 Adafruit_LPS2X lps;
 
@@ -37,6 +44,7 @@ void loop() {
   sensors_event_t pressure;
   lps.getEvent(&pressure, &temp);// get pressure
   Serial.print("Temperature: ");Serial.print(temp.temperature);Serial.println(" degrees C");
-  Serial.print("Pressure: ");Serial.print(pressure.pressure);Serial.println(" degrees C");
+  Serial.print("Pressure: ");Serial.print(pressure.pressure);Serial.println(" hPa");
+  Serial.println("");
   delay(100);
 }

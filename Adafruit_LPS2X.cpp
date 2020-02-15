@@ -48,7 +48,12 @@ Adafruit_LPS2X::Adafruit_LPS2X(void) {}
  * @brief Destroy the Adafruit_LPS2X::Adafruit_LPS2X object
  *
  */
-Adafruit_LPS2X::~Adafruit_LPS2X(void) { Serial.println("Called destructor"); }
+Adafruit_LPS2X::~Adafruit_LPS2X(void) {
+  if (temp_sensor)
+    delete temp_sensor;
+  if (pressure_sensor)
+    delete pressure_sensor;
+}
 
 /*!
  *    @brief  Sets up the hardware and initializes I2C
@@ -62,12 +67,71 @@ Adafruit_LPS2X::~Adafruit_LPS2X(void) { Serial.println("Called destructor"); }
  */
 bool Adafruit_LPS2X::begin_I2C(uint8_t i2c_address, TwoWire *wire,
                                int32_t sensor_id) {
+  spi_dev = NULL;
+  if (i2c_dev) {
+    delete i2c_dev; // remove old interface
+  }
+
   i2c_dev = new Adafruit_I2CDevice(i2c_address, wire);
 
   if (!i2c_dev->begin()) {
     return false;
   }
 
+  return _init(sensor_id);
+}
+
+/*!
+ *    @brief  Sets up the hardware and initializes hardware SPI
+ *    @param  cs_pin The arduino pin # connected to chip select
+ *    @param  theSPI The SPI object to be used for SPI connections.
+ *    @param  sensor_id
+ *            The user-defined ID to differentiate different sensors
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool Adafruit_LPS2X::begin_SPI(uint8_t cs_pin, SPIClass *theSPI,
+                               int32_t sensor_id) {
+  i2c_dev = NULL;
+
+  if (spi_dev) {
+    delete spi_dev; // remove old interface
+  }
+  spi_dev = new Adafruit_SPIDevice(cs_pin,
+                                   1000000,               // frequency
+                                   SPI_BITORDER_MSBFIRST, // bit order
+                                   SPI_MODE0,             // data mode
+                                   theSPI);
+  if (!spi_dev->begin()) {
+    return false;
+  }
+
+  return _init(sensor_id);
+}
+
+/*!
+ *    @brief  Sets up the hardware and initializes software SPI
+ *    @param  cs_pin The arduino pin # connected to chip select
+ *    @param  sck_pin The arduino pin # connected to SPI clock
+ *    @param  miso_pin The arduino pin # connected to SPI MISO
+ *    @param  mosi_pin The arduino pin # connected to SPI MOSI
+ *    @param  sensor_id
+ *            The user-defined ID to differentiate different sensors
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool Adafruit_LPS2X::begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
+                               int8_t mosi_pin, int32_t sensor_id) {
+  i2c_dev = NULL;
+
+  if (spi_dev) {
+    delete spi_dev; // remove old interface
+  }
+  spi_dev = new Adafruit_SPIDevice(cs_pin, sck_pin, miso_pin, mosi_pin,
+                                   1000000,               // frequency
+                                   SPI_BITORDER_MSBFIRST, // bit order
+                                   SPI_MODE0);            // data mode
+  if (!spi_dev->begin()) {
+    return false;
+  }
   return _init(sensor_id);
 }
 
@@ -92,8 +156,8 @@ bool Adafruit_LPS2X::_init(int32_t sensor_id) {
   powerDown(false);
   setDataRate(LPS2X_RATE_25_HZ);
 
-  // pressure_sensor = new Adafruit_LPS2X_Pressure(this);
-  // temp_sensor = new Adafruit_LPS2X_Temp(this);
+  pressure_sensor = new Adafruit_LPS2X_Pressure(this);
+  temp_sensor = new Adafruit_LPS2X_Temp(this);
 
   return true;
 }
@@ -162,11 +226,19 @@ void Adafruit_LPS2X::setDataRate(lps2x_rate_t new_data_rate) {
 /**************************************************************************/
 void Adafruit_LPS2X::_read(void) {
   // get raw readings
+  uint8_t pressure_addr = LPS2X_PRESS_OUT_XL;
+  uint8_t temp_addr = LPS2X_TEMP_OUT_L;
+  if (spi_dev) {
+    // for LPS2X SPI, addr[7] is r/w, addr[6] is auto increment
+    pressure_addr |= 0x40;
+    temp_addr |= 0x40;
+  }
+
   Adafruit_BusIO_Register pressure_data = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_PRESS_OUT_XL, 3);
+      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, pressure_addr, 3);
 
   Adafruit_BusIO_Register temp_data = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_TEMP_OUT_L, 2);
+      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, temp_addr, 2);
 
   uint8_t buffer[3];
 
@@ -185,6 +257,23 @@ void Adafruit_LPS2X::_read(void) {
     raw_pressure = raw_pressure - 0xFFFFFF;
   }
   unscaled_pressure = raw_pressure;
+}
+
+/*!
+    @brief  Gets an Adafruit Unified Sensor object for the presure sensor
+   component
+    @return Adafruit_Sensor pointer to pressure sensor
+ */
+Adafruit_Sensor *Adafruit_LPS2X::getPressureSensor(void) {
+  return pressure_sensor;
+}
+
+/*!
+    @brief  Gets an Adafruit Unified Sensor object for the temp sensor component
+    @return Adafruit_Sensor pointer to temperature sensor
+ */
+Adafruit_Sensor *Adafruit_LPS2X::getTemperatureSensor(void) {
+  return temp_sensor;
 }
 
 /**************************************************************************/
@@ -224,4 +313,76 @@ void Adafruit_LPS2X::fillTempEvent(sensors_event_t *temp, uint32_t timestamp) {
   temp->type = SENSOR_TYPE_AMBIENT_TEMPERATURE;
   temp->timestamp = timestamp;
   temp->temperature = (unscaled_temp / 480) + 42.5;
+}
+
+/**************************************************************************/
+/*!
+    @brief  Gets the sensor_t data for the LPS2X's tenperature
+*/
+/**************************************************************************/
+void Adafruit_LPS2X_Pressure::getSensor(sensor_t *sensor) {
+  /* Clear the sensor_t object */
+  memset(sensor, 0, sizeof(sensor_t));
+
+  /* Insert the sensor name in the fixed length char array */
+  strncpy(sensor->name, "LPS2X_P", sizeof(sensor->name) - 1);
+  sensor->name[sizeof(sensor->name) - 1] = 0;
+  sensor->version = 1;
+  sensor->sensor_id = _sensorID;
+  sensor->type = SENSOR_TYPE_PRESSURE;
+  sensor->min_delay = 0;
+  sensor->min_value = 260;
+  sensor->max_value = 1260;
+  // 4096 LSB = 1 hPa >>  1 LSB = 1/4096 hPa >> 1 LSB =  2.441e-4 hPa
+  sensor->resolution = 2.441e-4;
+}
+
+/**************************************************************************/
+/*!
+    @brief  Gets the pressure as a standard sensor event
+    @param  event Sensor event object that will be populated
+    @returns True
+*/
+/**************************************************************************/
+bool Adafruit_LPS2X_Pressure::getEvent(sensors_event_t *event) {
+  _theLPS2X->_read();
+  _theLPS2X->fillPressureEvent(event, millis());
+
+  return true;
+}
+
+/**************************************************************************/
+/*!
+    @brief  Gets the sensor_t data for the LPS2X's tenperature
+*/
+/**************************************************************************/
+void Adafruit_LPS2X_Temp::getSensor(sensor_t *sensor) {
+  /* Clear the sensor_t object */
+  memset(sensor, 0, sizeof(sensor_t));
+
+  /* Insert the sensor name in the fixed length char array */
+  strncpy(sensor->name, "LPS2X_T", sizeof(sensor->name) - 1);
+  sensor->name[sizeof(sensor->name) - 1] = 0;
+  sensor->version = 1;
+  sensor->sensor_id = _sensorID;
+  sensor->type = SENSOR_TYPE_AMBIENT_TEMPERATURE;
+  sensor->min_delay = 0;
+  sensor->min_value = -30;
+  sensor->max_value = 105;
+  // 480 LSB = 1°C >> 1 LSB = 1/480°C >> 1 LSB =  0.00208 °C
+  sensor->resolution = 0.00208;
+}
+
+/**************************************************************************/
+/*!
+    @brief  Gets the temperature as a standard sensor event
+    @param  event Sensor event object that will be populated
+    @returns True
+*/
+/**************************************************************************/
+bool Adafruit_LPS2X_Temp::getEvent(sensors_event_t *event) {
+  _theLPS2X->_read();
+  _theLPS2X->fillTempEvent(event, millis());
+
+  return true;
 }
