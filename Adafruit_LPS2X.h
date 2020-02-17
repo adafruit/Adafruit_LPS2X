@@ -31,6 +31,9 @@
 #define LPS2X_WHOAMI 0x0F      ///< Chip ID register
 #define LPS2X_CTRL_REG1 0x20   ///< First control register. Includes BD & ODR
 #define LPS2X_CTRL_REG2 0x21   ///< Second control register. Includes SW Reset
+#define LPS2X_CTRL_REG3 0x22   ///< Third control register. Includes interrupt polarity
+#define LPS2X_CTRL_REG4 0x23   ///< Fourth control register. Includes DRDY INT control
+#define LPS2X_INTERRUPT_CFG 0x24   ///< Interrupt control register
 #define LPS2X_PRESS_OUT_XL                                                     \
   (0x28 | 0x80) ///< | 0x80 to set auto increment on multi-byte read
 #define LPS2X_TEMP_OUT_L (0x2B | 0x80) ///< | 0x80 to set auto increment on
@@ -99,7 +102,8 @@ public:
   lps2x_rate_t getDataRate(void);
 
   void setDataRate(lps2x_rate_t data_rate);
-
+  bool enableInterrupts(bool enabled);
+  bool interruptsActiveLow(bool active_low);
   bool getEvent(sensors_event_t *pressure, sensors_event_t *temp);
   void reset(void);
 
