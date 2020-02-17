@@ -102,8 +102,8 @@ public:
   lps2x_rate_t getDataRate(void);
 
   void setDataRate(lps2x_rate_t data_rate);
-  bool enableInterrupts(bool enabled);
-  bool interruptsActiveLow(bool active_low);
+  void enableDataReadyInterrupts(bool enabled);
+  void interruptsActiveLow(bool active_low);
   bool getEvent(sensors_event_t *pressure, sensors_event_t *temp);
   void reset(void);
 

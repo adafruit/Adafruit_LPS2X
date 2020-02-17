@@ -396,31 +396,29 @@ bool Adafruit_LPS2X_Temp::getEvent(sensors_event_t *event) {
 
   return true;
 }
-
-bool Adafruit_LPS2X::interruptsActiveLow(bool active_low){
-
-  Adafruit_BusIO_Register ctrl1 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG1, 1);
-
+/**
+ * @brief Sets the polarity of the INT pin.
+ * 
+ * @param active_low Set to true to make the pin active low
+ */
+void Adafruit_LPS2X::interruptsActiveLow(bool active_low){
   Adafruit_BusIO_Register ctrl3 = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG3, 1);
-
-  Adafruit_BusIO_RegisterBits interrupt_enable_bit =
-      Adafruit_BusIO_RegisterBits(&ctrl1, 1, 3);
 
   Adafruit_BusIO_RegisterBits active_low_bit =
       Adafruit_BusIO_RegisterBits(&ctrl3, 1, 7);
   active_low_bit.write(active_low);
-  //HACK
-  return true;
-
 }
 
-bool Adafruit_LPS2X::enableInterrupts(bool enabled){
+/**
+ * @brief Enables the data ready interrupt on the INT pin
+ * 
+ * @param enabled Set to true to enable, false to disable the Data ready pin
+ */
+void Adafruit_LPS2X::enableDataReadyInterrupts(bool enabled){
 
   Adafruit_BusIO_Register ctrl1 = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG1, 1);
-
 
   Adafruit_BusIO_Register ctrl3 = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG3, 1);
@@ -428,19 +426,14 @@ bool Adafruit_LPS2X::enableInterrupts(bool enabled){
   Adafruit_BusIO_Register ctrl4 = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG4, 1);
 
-  Adafruit_BusIO_RegisterBits interrupt_enable_bit =
-      Adafruit_BusIO_RegisterBits(&ctrl1, 1, 3);
-
-  // I think this is unneeded
-  Adafruit_BusIO_RegisterBits int_data_signal =
-      Adafruit_BusIO_RegisterBits(&ctrl3, 2, 0);
-
   Adafruit_BusIO_RegisterBits data_ready_int_pin_enable =
       Adafruit_BusIO_RegisterBits(&ctrl4, 1, 0);
 
-  interrupt_enable_bit.write(enabled);
-  int_data_signal.write(0b11);
+  Adafruit_BusIO_RegisterBits int_data_signal_bits =
+      Adafruit_BusIO_RegisterBits(&ctrl3, 2, 0);
+
+  int_data_signal_bits.write(0b11);
   data_ready_int_pin_enable.write(enabled);
-  //HACK
-  return true;
+
+
 }
