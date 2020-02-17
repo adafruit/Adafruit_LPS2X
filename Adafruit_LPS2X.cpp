@@ -243,10 +243,20 @@ void Adafruit_LPS2X::_read(void) {
   uint8_t buffer[3];
 
   temp_data.read(buffer, 2);
-  int16_t raw_temp = buffer[1] << 8 | buffer[0];
+  int16_t raw_temp;
+
+  raw_temp |= (int16_t)(buffer[1]);
+  raw_temp <<= 8;
+  raw_temp |= (int16_t)(buffer[0]);
 
   pressure_data.read(buffer, 3);
-  int32_t raw_pressure = buffer[2] << 16 | buffer[1] << 8 | buffer[0];
+  int32_t raw_pressure;
+
+  raw_pressure = (int32_t)buffer[2];
+  raw_pressure <<= 8;
+  raw_pressure |= (int32_t)(buffer[1]);
+  raw_pressure <<= 8;
+  raw_pressure |= (int32_t)(buffer[0]);
 
   if (raw_temp & 0x8000) {
     raw_temp = raw_temp - 0xFFFF;

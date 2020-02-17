@@ -64,7 +64,8 @@ private:
   Adafruit_LPS2X *_theLPS2X = NULL;
 };
 
-/** Adafruit Unified Sensor interface for the pressure sensor component of LPS2X */
+/** Adafruit Unified Sensor interface for the pressure sensor component of LPS2X
+ */
 class Adafruit_LPS2X_Pressure : public Adafruit_Sensor {
 public:
   /** @brief Create an Adafruit_Sensor compatible object for the pressure sensor
@@ -90,7 +91,8 @@ public:
   bool begin_I2C(uint8_t i2c_addr = LPS2X_I2CADDR_DEFAULT,
                  TwoWire *wire = &Wire, int32_t sensor_id = 0);
 
-  bool begin_SPI(uint8_t cs_pin, SPIClass *theSPI = &SPI, int32_t sensor_id = 0);
+  bool begin_SPI(uint8_t cs_pin, SPIClass *theSPI = &SPI,
+                 int32_t sensor_id = 0);
   bool begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
                  int8_t mosi_pin, int32_t sensor_id = 0);
   void powerDown(bool power_down);
@@ -108,27 +110,25 @@ protected:
   void _read(void);
   virtual bool _init(int32_t sensor_id);
 
-
   float unscaled_temp,   ///< Last reading's temperature (C) before scaling
       unscaled_pressure; ///< Last reading's pressure (hPa) before scaling
 
   uint16_t _sensorid_pressure, ///< ID number for pressure
       _sensorid_temp;          ///< ID number for temperature
 
-  Adafruit_I2CDevice *i2c_dev;
-  Adafruit_SPIDevice *spi_dev;
+  Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
+  Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
 
- Adafruit_LPS2X_Temp *temp_sensor = NULL; ///< Temp sensor data object
+  Adafruit_LPS2X_Temp *temp_sensor = NULL; ///< Temp sensor data object
   Adafruit_LPS2X_Pressure *pressure_sensor =
-      NULL;  ///< Pressure sensor data object
+      NULL; ///< Pressure sensor data object
 
 private:
-  friend class Adafruit_LPS2X_Temp; ///< Gives access to private members to
-                                     ///< Temp data object
+  friend class Adafruit_LPS2X_Temp;     ///< Gives access to private members to
+                                        ///< Temp data object
   friend class Adafruit_LPS2X_Pressure; ///< Gives access to private
-                                              ///< members to Pressure data
-                                              ///< object
-
+                                        ///< members to Pressure data
+                                        ///< object
 
   void fillPressureEvent(sensors_event_t *pressure, uint32_t timestamp);
   void fillTempEvent(sensors_event_t *temp, uint32_t timestamp);
