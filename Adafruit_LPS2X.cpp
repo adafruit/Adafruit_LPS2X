@@ -398,10 +398,10 @@ bool Adafruit_LPS2X_Temp::getEvent(sensors_event_t *event) {
 }
 /**
  * @brief Sets the polarity of the INT pin.
- * 
+ *
  * @param active_low Set to true to make the pin active low
  */
-void Adafruit_LPS2X::interruptsActiveLow(bool active_low){
+void Adafruit_LPS2X::interruptsActiveLow(bool active_low) {
   Adafruit_BusIO_Register ctrl3 = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG3, 1);
 
