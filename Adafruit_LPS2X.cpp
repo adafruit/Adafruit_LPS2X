@@ -409,31 +409,3 @@ void Adafruit_LPS2X::interruptsActiveLow(bool active_low){
       Adafruit_BusIO_RegisterBits(&ctrl3, 1, 7);
   active_low_bit.write(active_low);
 }
-
-/**
- * @brief Enables the data ready interrupt on the INT pin
- * 
- * @param enabled Set to true to enable, false to disable the Data ready pin
- */
-void Adafruit_LPS2X::enableDataReadyInterrupts(bool enabled){
-
-  Adafruit_BusIO_Register ctrl1 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG1, 1);
-
-  Adafruit_BusIO_Register ctrl3 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG3, 1);
-
-  Adafruit_BusIO_Register ctrl4 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG4, 1);
-
-  Adafruit_BusIO_RegisterBits data_ready_int_pin_enable =
-      Adafruit_BusIO_RegisterBits(&ctrl4, 1, 0);
-
-  Adafruit_BusIO_RegisterBits int_data_signal_bits =
-      Adafruit_BusIO_RegisterBits(&ctrl3, 2, 0);
-
-  int_data_signal_bits.write(0b11);
-  data_ready_int_pin_enable.write(enabled);
-
-
-}
