@@ -158,7 +158,7 @@ bool Adafruit_LPS2X::_init(int32_t sensor_id) {
 
   pressure_sensor = new Adafruit_LPS2X_Pressure(this);
   temp_sensor = new Adafruit_LPS2X_Temp(this);
-
+  delay(10); // delay for first reading
   return true;
 }
 
