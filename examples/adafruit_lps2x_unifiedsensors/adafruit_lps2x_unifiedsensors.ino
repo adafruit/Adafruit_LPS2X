@@ -40,6 +40,7 @@ void loop() {
 
   /* Display the results (pressure is measured in hPa) */
   Serial.print("\t\tPressure: ");Serial.print(pressure.pressure);Serial.println(" hPa");
+  Serial.print("\t\tTemperature: ");Serial.print(temp.temperature);Serial.println(" degrees C");
 
 
   delay(100);
