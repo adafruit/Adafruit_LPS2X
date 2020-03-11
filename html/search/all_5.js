@@ -1,6 +1,7 @@
 var searchData=
 [
   ['library_20for_20the_20lps2x_20family_20of_20barometric_20pressure_20sensors',['Library for the LPS2X family of barometric pressure sensors',['../index.html',1,'']]],
+  ['lps25hb_5fchip_5fid',['LPS25HB_CHIP_ID',['../_adafruit___l_p_s2_x_8h.html#a67976fd74ab33ed8017eafa07ba15118',1,'Adafruit_LPS2X.h']]],
   ['lps2x_5fchip_5fid',['LPS2X_CHIP_ID',['../_adafruit___l_p_s2_x_8h.html#af399748a6e679dc5c6e8b53ae069a228',1,'Adafruit_LPS2X.h']]],
   ['lps2x_5fctrl_5freg1',['LPS2X_CTRL_REG1',['../_adafruit___l_p_s2_x_8h.html#ae2621e4a969d12d1f612a3cebad62a14',1,'Adafruit_LPS2X.h']]],
   ['lps2x_5fctrl_5freg2',['LPS2X_CTRL_REG2',['../_adafruit___l_p_s2_x_8h.html#aef14a5b596b4388d2cca0614269351ce',1,'Adafruit_LPS2X.h']]],
