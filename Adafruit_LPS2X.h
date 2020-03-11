@@ -25,7 +25,8 @@
 #include <Wire.h>
 
 #define LPS2X_I2CADDR_DEFAULT 0x5D ///< LPS2X default i2c address
-#define LPS2X_CHIP_ID 0xBD         ///< LPS2X default device id from WHOAMI
+#define LPS2X_CHIP_ID 0xB1         ///< LPS2X default device id from WHOAMI
+#define LPS25HB_CHIP_ID 0xBD       ///< LPS25HB default device id from WHOAMI
 
 #define LPS2X_EXAMPLE_REG 0x00 ///< Example register
 #define LPS2X_WHOAMI 0x0F      ///< Chip ID register

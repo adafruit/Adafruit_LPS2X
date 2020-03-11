@@ -145,7 +145,9 @@ bool Adafruit_LPS2X::_init(int32_t sensor_id) {
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_WHOAMI, 1);
 
   // make sure we're talking to the right chip
-  if (chip_id.read() != LPS2X_CHIP_ID) {
+  uint8_t id = chip_id.read();
+
+  if ((id != LPS2X_CHIP_ID) && (id != LPS25HB_CHIP_ID)) {
     return false;
   }
   _sensorid_pressure = sensor_id;
