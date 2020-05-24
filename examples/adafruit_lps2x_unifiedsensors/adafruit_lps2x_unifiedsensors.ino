@@ -2,7 +2,8 @@
 
 #include <Adafruit_LPS2X.h>
 
-Adafruit_LPS2X lps;
+// Use LPS25 or LPS22 here
+Adafruit_LPS25 lps;
 Adafruit_Sensor *lps_temp, *lps_pressure;
 
 void setup(void) {
