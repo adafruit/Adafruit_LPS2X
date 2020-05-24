@@ -65,7 +65,7 @@ $(function() {
 <a href="#friends">Friends</a> &#124;
 <a href="class_adafruit___l_p_s2_x-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Adafruit_LPS2X Class Reference</div>  </div>
+<div class="title">Adafruit_LPS2X Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -73,6 +73,16 @@ $(function() {
  <a href="class_adafruit___l_p_s2_x.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_adafruit___l_p_s2_x_8h_source.html">Adafruit_LPS2X.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Adafruit_LPS2X:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_adafruit___l_p_s2_x.png" usemap="#Adafruit_5FLPS2X_map" alt=""/>
+  <map id="Adafruit_5FLPS2X_map" name="Adafruit_5FLPS2X_map">
+<area href="class_adafruit___l_p_s22.html" alt="Adafruit_LPS22" shape="rect" coords="0,56,103,80"/>
+<area href="class_adafruit___l_p_s25.html" alt="Adafruit_LPS25" shape="rect" coords="113,56,216,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -93,18 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac81cefe466bf6ba616d45821427f81a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#ac81cefe466bf6ba616d45821427f81a4">begin_SPI</a> (int8_t cs_pin, int8_t sck_pin, int8_t miso_pin, int8_t mosi_pin, int32_t sensor_id=0)</td></tr>
 <tr class="memdesc:ac81cefe466bf6ba616d45821427f81a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the hardware and initializes software SPI.  <a href="#ac81cefe466bf6ba616d45821427f81a4">More...</a><br /></td></tr>
 <tr class="separator:ac81cefe466bf6ba616d45821427f81a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f8a64cd9e32516e109e84b24cca9c6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a5f8a64cd9e32516e109e84b24cca9c6a">powerDown</a> (bool power_down)</td></tr>
-<tr class="memdesc:a5f8a64cd9e32516e109e84b24cca9c6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts the sensor into power down mode, shutting the sensor down.  <a href="#a5f8a64cd9e32516e109e84b24cca9c6a">More...</a><br /></td></tr>
-<tr class="separator:a5f8a64cd9e32516e109e84b24cca9c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a452f1e93c6dfcf7f0ac4a86c2e257290"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_adafruit___l_p_s2_x_8h.html#adf1110a1bd3a6c4a4c00685cf128b53f">lps2x_rate_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a452f1e93c6dfcf7f0ac4a86c2e257290">getDataRate</a> (void)</td></tr>
-<tr class="memdesc:a452f1e93c6dfcf7f0ac4a86c2e257290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current rate at which pressure and temperature measurements are taken.  <a href="#a452f1e93c6dfcf7f0ac4a86c2e257290">More...</a><br /></td></tr>
-<tr class="separator:a452f1e93c6dfcf7f0ac4a86c2e257290"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac805e8855aa40f718dfd4dedb4f47822"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#ac805e8855aa40f718dfd4dedb4f47822">setDataRate</a> (<a class="el" href="_adafruit___l_p_s2_x_8h.html#adf1110a1bd3a6c4a4c00685cf128b53f">lps2x_rate_t</a> data_rate)</td></tr>
-<tr class="memdesc:ac805e8855aa40f718dfd4dedb4f47822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the rate at which pressure and temperature measurements.  <a href="#ac805e8855aa40f718dfd4dedb4f47822">More...</a><br /></td></tr>
-<tr class="separator:ac805e8855aa40f718dfd4dedb4f47822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4104e8ae74d4771df90a4f980876e9fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a4104e8ae74d4771df90a4f980876e9fd">interruptsActiveLow</a> (bool active_low)</td></tr>
-<tr class="memdesc:a4104e8ae74d4771df90a4f980876e9fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the polarity of the INT pin.  <a href="#a4104e8ae74d4771df90a4f980876e9fd">More...</a><br /></td></tr>
-<tr class="separator:a4104e8ae74d4771df90a4f980876e9fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24d99fa65cf21bddd3ce90cdc2cf5279"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a24d99fa65cf21bddd3ce90cdc2cf5279">setPresThreshold</a> (uint16_t hPa_delta)</td></tr>
+<tr class="memdesc:a24d99fa65cf21bddd3ce90cdc2cf5279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pressure threshold register for interrupt levels.  <a href="#a24d99fa65cf21bddd3ce90cdc2cf5279">More...</a><br /></td></tr>
+<tr class="separator:a24d99fa65cf21bddd3ce90cdc2cf5279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf2513dfbe7d2a63eedadb10638d3cd1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#aaf2513dfbe7d2a63eedadb10638d3cd1">getEvent</a> (sensors_event_t *pressure, sensors_event_t *temp)</td></tr>
 <tr class="memdesc:aaf2513dfbe7d2a63eedadb10638d3cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pressure sensor and temperature values as sensor events.  <a href="#aaf2513dfbe7d2a63eedadb10638d3cd1">More...</a><br /></td></tr>
 <tr class="separator:aaf2513dfbe7d2a63eedadb10638d3cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,24 +122,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ada26fe62be9f8af77f1a2568436a574e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#ada26fe62be9f8af77f1a2568436a574e">_init</a> (int32_t sensor_id)=0</td></tr>
+<tr class="memdesc:ada26fe62be9f8af77f1a2568436a574e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The subclasses' hardware initialization function.  <a href="#ada26fe62be9f8af77f1a2568436a574e">More...</a><br /></td></tr>
+<tr class="separator:ada26fe62be9f8af77f1a2568436a574e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af98ad5743558fae15a23d9b319f96ebb"><td class="memItemLeft" align="right" valign="top"><a id="af98ad5743558fae15a23d9b319f96ebb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#af98ad5743558fae15a23d9b319f96ebb">_read</a> (void)</td></tr>
 <tr class="memdesc:af98ad5743558fae15a23d9b319f96ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the measurement data for all sensors simultaneously. <br /></td></tr>
 <tr class="separator:af98ad5743558fae15a23d9b319f96ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8249f4b99aa356cdbc565750f5a443c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#af8249f4b99aa356cdbc565750f5a443c">_init</a> (int32_t sensor_id)</td></tr>
-<tr class="memdesc:af8249f4b99aa356cdbc565750f5a443c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializer for post i2c/spi init.  <a href="#af8249f4b99aa356cdbc565750f5a443c">More...</a><br /></td></tr>
-<tr class="separator:af8249f4b99aa356cdbc565750f5a443c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa3f5162ac6748604e72552d3d928360b"><td class="memItemLeft" align="right" valign="top"><a id="aa3f5162ac6748604e72552d3d928360b"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#aa3f5162ac6748604e72552d3d928360b">unscaled_temp</a></td></tr>
-<tr class="memdesc:aa3f5162ac6748604e72552d3d928360b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last reading's temperature (C) before scaling. <br /></td></tr>
-<tr class="separator:aa3f5162ac6748604e72552d3d928360b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60c35ad8d726263570e8081ce31b3cac"><td class="memItemLeft" align="right" valign="top"><a id="a60c35ad8d726263570e8081ce31b3cac"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a60c35ad8d726263570e8081ce31b3cac">unscaled_pressure</a></td></tr>
-<tr class="memdesc:a60c35ad8d726263570e8081ce31b3cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last reading's pressure (hPa) before scaling. <br /></td></tr>
-<tr class="separator:a60c35ad8d726263570e8081ce31b3cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add77f310e0806aaf04a76ee19cf46631"><td class="memItemLeft" align="right" valign="top"><a id="add77f310e0806aaf04a76ee19cf46631"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#add77f310e0806aaf04a76ee19cf46631">_temp</a></td></tr>
+<tr class="memdesc:add77f310e0806aaf04a76ee19cf46631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last reading's temperature (C) <br /></td></tr>
+<tr class="separator:add77f310e0806aaf04a76ee19cf46631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a67de63a66d68b335807bed7e780d7e"><td class="memItemLeft" align="right" valign="top"><a id="a4a67de63a66d68b335807bed7e780d7e"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a4a67de63a66d68b335807bed7e780d7e">_pressure</a></td></tr>
+<tr class="memdesc:a4a67de63a66d68b335807bed7e780d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last reading's pressure (hPa) <br /></td></tr>
+<tr class="separator:a4a67de63a66d68b335807bed7e780d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9fddc8252d7f8114fb231a43d1b7ed7"><td class="memItemLeft" align="right" valign="top"><a id="ab9fddc8252d7f8114fb231a43d1b7ed7"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#ab9fddc8252d7f8114fb231a43d1b7ed7">_sensorid_pressure</a></td></tr>
 <tr class="memdesc:ab9fddc8252d7f8114fb231a43d1b7ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID number for pressure. <br /></td></tr>
@@ -147,6 +148,13 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#af57af919c2f829b8d7f8775b0a75a945">_sensorid_temp</a></td></tr>
 <tr class="memdesc:af57af919c2f829b8d7f8775b0a75a945"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID number for temperature. <br /></td></tr>
 <tr class="separator:af57af919c2f829b8d7f8775b0a75a945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f6e6112d537dfc8c108376f8ee63f34"><td class="memItemLeft" align="right" valign="top"><a id="a4f6e6112d537dfc8c108376f8ee63f34"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a4f6e6112d537dfc8c108376f8ee63f34">temp_scaling</a> = 1</td></tr>
+<tr class="memdesc:a4f6e6112d537dfc8c108376f8ee63f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Different chips have different scalings. <br /></td></tr>
+<tr class="separator:a4f6e6112d537dfc8c108376f8ee63f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78449fa53f00cb82051e0e1047f12a88"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a78449fa53f00cb82051e0e1047f12a88">inc_spi_flag</a></td></tr>
+<tr class="memdesc:a78449fa53f00cb82051e0e1047f12a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">If this chip has a bitflag for incrementing SPI registers.  <a href="#a78449fa53f00cb82051e0e1047f12a88">More...</a><br /></td></tr>
+<tr class="separator:a78449fa53f00cb82051e0e1047f12a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a198e3f5145cd5cec000527c1ae33b796"><td class="memItemLeft" align="right" valign="top"><a id="a198e3f5145cd5cec000527c1ae33b796"></a>
 Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a198e3f5145cd5cec000527c1ae33b796">i2c_dev</a> = NULL</td></tr>
 <tr class="memdesc:a198e3f5145cd5cec000527c1ae33b796"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to I2C bus interface. <br /></td></tr>
@@ -162,6 +170,22 @@ Adafruit_SPIDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 <tr class="memitem:ac64d2fcb3de938ece22f4e876e139ea9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_adafruit___l_p_s2_x___pressure.html">Adafruit_LPS2X_Pressure</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#ac64d2fcb3de938ece22f4e876e139ea9">pressure_sensor</a></td></tr>
 <tr class="memdesc:ac64d2fcb3de938ece22f4e876e139ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pressure sensor data object.  <a href="#ac64d2fcb3de938ece22f4e876e139ea9">More...</a><br /></td></tr>
 <tr class="separator:ac64d2fcb3de938ece22f4e876e139ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3388398765fa64c66552a194b32fde80"><td class="memItemLeft" align="right" valign="top"><a id="a3388398765fa64c66552a194b32fde80"></a>
+Adafruit_BusIO_Register *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a3388398765fa64c66552a194b32fde80">ctrl1_reg</a> = NULL</td></tr>
+<tr class="memdesc:a3388398765fa64c66552a194b32fde80"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first control register. <br /></td></tr>
+<tr class="separator:a3388398765fa64c66552a194b32fde80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c8e552bdace81b49b844354438be76"><td class="memItemLeft" align="right" valign="top"><a id="a41c8e552bdace81b49b844354438be76"></a>
+Adafruit_BusIO_Register *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a41c8e552bdace81b49b844354438be76">ctrl2_reg</a> = NULL</td></tr>
+<tr class="memdesc:a41c8e552bdace81b49b844354438be76"><td class="mdescLeft">&#160;</td><td class="mdescRight">The second control register. <br /></td></tr>
+<tr class="separator:a41c8e552bdace81b49b844354438be76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17882edd7eac7e2d2062729032968d90"><td class="memItemLeft" align="right" valign="top"><a id="a17882edd7eac7e2d2062729032968d90"></a>
+Adafruit_BusIO_Register *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#a17882edd7eac7e2d2062729032968d90">ctrl3_reg</a> = NULL</td></tr>
+<tr class="memdesc:a17882edd7eac7e2d2062729032968d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">The third control register. <br /></td></tr>
+<tr class="separator:a17882edd7eac7e2d2062729032968d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace39ad29e62067c754cf753b0421e8f1"><td class="memItemLeft" align="right" valign="top"><a id="ace39ad29e62067c754cf753b0421e8f1"></a>
+Adafruit_BusIO_Register *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html#ace39ad29e62067c754cf753b0421e8f1">threshp_reg</a> = NULL</td></tr>
+<tr class="memdesc:ace39ad29e62067c754cf753b0421e8f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pressure threshold. <br /></td></tr>
+<tr class="separator:ace39ad29e62067c754cf753b0421e8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -322,99 +346,26 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a5f8a64cd9e32516e109e84b24cca9c6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f8a64cd9e32516e109e84b24cca9c6a">&#9670;&nbsp;</a></span>powerDown()</h2>
+<a id="a24d99fa65cf21bddd3ce90cdc2cf5279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24d99fa65cf21bddd3ce90cdc2cf5279">&#9670;&nbsp;</a></span>setPresThreshold()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Adafruit_LPS2X::powerDown </td>
+          <td class="memname">void Adafruit_LPS2X::setPresThreshold </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>power_down</em></td><td>)</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>hPa_delta</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Puts the sensor into power down mode, shutting the sensor down. </p>
+<p>Set the pressure threshold register for interrupt levels. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">power_down</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a452f1e93c6dfcf7f0ac4a86c2e257290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a452f1e93c6dfcf7f0ac4a86c2e257290">&#9670;&nbsp;</a></span>getDataRate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="_adafruit___l_p_s2_x_8h.html#adf1110a1bd3a6c4a4c00685cf128b53f">lps2x_rate_t</a> Adafruit_LPS2X::getDataRate </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets the current rate at which pressure and temperature measurements are taken. </p>
-<dl class="section return"><dt>Returns</dt><dd>lps2x_rate_t The current data rate </dd></dl>
-
-</div>
-</div>
-<a id="ac805e8855aa40f718dfd4dedb4f47822"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac805e8855aa40f718dfd4dedb4f47822">&#9670;&nbsp;</a></span>setDataRate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Adafruit_LPS2X::setDataRate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_adafruit___l_p_s2_x_8h.html#adf1110a1bd3a6c4a4c00685cf128b53f">lps2x_rate_t</a>&#160;</td>
-          <td class="paramname"><em>new_data_rate</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the rate at which pressure and temperature measurements. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">new_data_rate</td><td>The data rate to set. Must be a <code>lps2x_rate_t</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4104e8ae74d4771df90a4f980876e9fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4104e8ae74d4771df90a4f980876e9fd">&#9670;&nbsp;</a></span>interruptsActiveLow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Adafruit_LPS2X::interruptsActiveLow </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>active_low</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the polarity of the INT pin. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">active_low</td><td>Set to true to make the pin active low </td></tr>
+    <tr><td class="paramname">hPa_delta</td><td>The u16 that will be written to the register, check the datasheet for more info on the format of this value! </td></tr>
   </table>
   </dd>
 </dl>
@@ -501,8 +452,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="af8249f4b99aa356cdbc565750f5a443c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8249f4b99aa356cdbc565750f5a443c">&#9670;&nbsp;</a></span>_init()</h2>
+<a id="ada26fe62be9f8af77f1a2568436a574e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada26fe62be9f8af77f1a2568436a574e">&#9670;&nbsp;</a></span>_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -511,7 +462,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Adafruit_LPS2X::_init </td>
+          <td class="memname">virtual bool Adafruit_LPS2X::_init </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
           <td class="paramname"><em>sensor_id</em></td><td>)</td>
@@ -520,19 +471,21 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Initializer for post i2c/spi init. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>The subclasses' hardware initialization function. </p>
+<p>!</p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sensor_id</td><td>Optional unique ID for the sensor set </td></tr>
+    <tr><td class="paramname">sensor_id</td><td>The unique sensor id we want to assign it </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if chip identified and initialized </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false if something went wrong! </dd></dl>
+
+<p>Implemented in <a class="el" href="class_adafruit___l_p_s22.html#afd916edefd763300581b883986bf2647">Adafruit_LPS22</a>, and <a class="el" href="class_adafruit___l_p_s25.html#a18b3fbc266f39dd271aed00b690222ef">Adafruit_LPS25</a>.</p>
 
 </div>
 </div>
@@ -584,6 +537,30 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a78449fa53f00cb82051e0e1047f12a88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78449fa53f00cb82051e0e1047f12a88">&#9670;&nbsp;</a></span>inc_spi_flag</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t Adafruit_LPS2X::inc_spi_flag</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div><div class="line">      0</div></div><!-- fragment -->
+<p>If this chip has a bitflag for incrementing SPI registers. </p>
+
+</div>
+</div>
 <a id="ac64d2fcb3de938ece22f4e876e139ea9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac64d2fcb3de938ece22f4e876e139ea9">&#9670;&nbsp;</a></span>pressure_sensor</h2>
 

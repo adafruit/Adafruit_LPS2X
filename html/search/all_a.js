@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['unscaled_5fpressure',['unscaled_pressure',['../class_adafruit___l_p_s2_x.html#a60c35ad8d726263570e8081ce31b3cac',1,'Adafruit_LPS2X']]],
-  ['unscaled_5ftemp',['unscaled_temp',['../class_adafruit___l_p_s2_x.html#aa3f5162ac6748604e72552d3d928360b',1,'Adafruit_LPS2X']]]
+  ['temp_5fscaling',['temp_scaling',['../class_adafruit___l_p_s2_x.html#a4f6e6112d537dfc8c108376f8ee63f34',1,'Adafruit_LPS2X']]],
+  ['temp_5fsensor',['temp_sensor',['../class_adafruit___l_p_s2_x.html#a8898ee75ec83207786bad034dabf3fbd',1,'Adafruit_LPS2X']]],
+  ['threshp_5freg',['threshp_reg',['../class_adafruit___l_p_s2_x.html#ace39ad29e62067c754cf753b0421e8f1',1,'Adafruit_LPS2X']]]
 ];

@@ -83,6 +83,10 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s2_x.html">Adafruit_LPS2X</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that stores state and functions for interacting with the LPS2X I2C Barometric Pressure &amp; Temperature Sensor.  <a href="class_adafruit___l_p_s2_x.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s25.html">Adafruit_LPS25</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___l_p_s22.html">Adafruit_LPS22</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -90,42 +94,58 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a1da3fb6e550cad909c00a564a284757f">LPS2X_I2CADDR_DEFAULT</a>&#160;&#160;&#160;0x5D</td></tr>
 <tr class="memdesc:a1da3fb6e550cad909c00a564a284757f"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPS2X default i2c address. <br /></td></tr>
 <tr class="separator:a1da3fb6e550cad909c00a564a284757f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af399748a6e679dc5c6e8b53ae069a228"><td class="memItemLeft" align="right" valign="top"><a id="af399748a6e679dc5c6e8b53ae069a228"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#af399748a6e679dc5c6e8b53ae069a228">LPS2X_CHIP_ID</a>&#160;&#160;&#160;0xB1</td></tr>
-<tr class="memdesc:af399748a6e679dc5c6e8b53ae069a228"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPS2X default device id from WHOAMI. <br /></td></tr>
-<tr class="separator:af399748a6e679dc5c6e8b53ae069a228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67976fd74ab33ed8017eafa07ba15118"><td class="memItemLeft" align="right" valign="top"><a id="a67976fd74ab33ed8017eafa07ba15118"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a67976fd74ab33ed8017eafa07ba15118">LPS25HB_CHIP_ID</a>&#160;&#160;&#160;0xBD</td></tr>
-<tr class="memdesc:a67976fd74ab33ed8017eafa07ba15118"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPS25HB default device id from WHOAMI. <br /></td></tr>
-<tr class="separator:a67976fd74ab33ed8017eafa07ba15118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad090d8119422179c305c2c71cde8d3a6"><td class="memItemLeft" align="right" valign="top"><a id="ad090d8119422179c305c2c71cde8d3a6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#ad090d8119422179c305c2c71cde8d3a6">LPS2X_EXAMPLE_REG</a>&#160;&#160;&#160;0x00</td></tr>
-<tr class="memdesc:ad090d8119422179c305c2c71cde8d3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Example register. <br /></td></tr>
-<tr class="separator:ad090d8119422179c305c2c71cde8d3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9e4dbc1b826a99b95e8aee357e48b7c"><td class="memItemLeft" align="right" valign="top"><a id="af9e4dbc1b826a99b95e8aee357e48b7c"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#af9e4dbc1b826a99b95e8aee357e48b7c">LPS2X_WHOAMI</a>&#160;&#160;&#160;0x0F</td></tr>
 <tr class="memdesc:af9e4dbc1b826a99b95e8aee357e48b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chip ID register. <br /></td></tr>
 <tr class="separator:af9e4dbc1b826a99b95e8aee357e48b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2621e4a969d12d1f612a3cebad62a14"><td class="memItemLeft" align="right" valign="top"><a id="ae2621e4a969d12d1f612a3cebad62a14"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#ae2621e4a969d12d1f612a3cebad62a14">LPS2X_CTRL_REG1</a>&#160;&#160;&#160;0x20</td></tr>
-<tr class="memdesc:ae2621e4a969d12d1f612a3cebad62a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">First control register. Includes BD &amp; ODR. <br /></td></tr>
-<tr class="separator:ae2621e4a969d12d1f612a3cebad62a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef14a5b596b4388d2cca0614269351ce"><td class="memItemLeft" align="right" valign="top"><a id="aef14a5b596b4388d2cca0614269351ce"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#aef14a5b596b4388d2cca0614269351ce">LPS2X_CTRL_REG2</a>&#160;&#160;&#160;0x21</td></tr>
-<tr class="memdesc:aef14a5b596b4388d2cca0614269351ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second control register. Includes SW Reset. <br /></td></tr>
-<tr class="separator:aef14a5b596b4388d2cca0614269351ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a283b700cd668e0fd04c3868df6a92d5c"><td class="memItemLeft" align="right" valign="top"><a id="a283b700cd668e0fd04c3868df6a92d5c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a283b700cd668e0fd04c3868df6a92d5c">LPS2X_CTRL_REG3</a>&#160;&#160;&#160;0x22</td></tr>
-<tr class="memdesc:a283b700cd668e0fd04c3868df6a92d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Third control register. Includes interrupt polarity. <br /></td></tr>
-<tr class="separator:a283b700cd668e0fd04c3868df6a92d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ef13f511ecb2287d3fdc8fd7d1d3fca"><td class="memItemLeft" align="right" valign="top"><a id="a3ef13f511ecb2287d3fdc8fd7d1d3fca"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a3ef13f511ecb2287d3fdc8fd7d1d3fca">LPS2X_CTRL_REG4</a>&#160;&#160;&#160;0x23</td></tr>
-<tr class="memdesc:a3ef13f511ecb2287d3fdc8fd7d1d3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourth control register. Includes DRDY INT control. <br /></td></tr>
-<tr class="separator:a3ef13f511ecb2287d3fdc8fd7d1d3fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a093b9ca02d7ea08330eb32279e5e7c7a"><td class="memItemLeft" align="right" valign="top"><a id="a093b9ca02d7ea08330eb32279e5e7c7a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a093b9ca02d7ea08330eb32279e5e7c7a">LPS2X_INTERRUPT_CFG</a>&#160;&#160;&#160;0x24</td></tr>
-<tr class="memdesc:a093b9ca02d7ea08330eb32279e5e7c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt control register. <br /></td></tr>
-<tr class="separator:a093b9ca02d7ea08330eb32279e5e7c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae94198bbacec0a3adaeb2357bd9172ed"><td class="memItemLeft" align="right" valign="top"><a id="ae94198bbacec0a3adaeb2357bd9172ed"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#ae94198bbacec0a3adaeb2357bd9172ed">LPS22HB_CHIP_ID</a>&#160;&#160;&#160;0xB1</td></tr>
+<tr class="memdesc:ae94198bbacec0a3adaeb2357bd9172ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPS22 default device id from WHOAMI. <br /></td></tr>
+<tr class="separator:ae94198bbacec0a3adaeb2357bd9172ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb0911f59324c4f44b228ea72c4fca1b"><td class="memItemLeft" align="right" valign="top"><a id="aeb0911f59324c4f44b228ea72c4fca1b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#aeb0911f59324c4f44b228ea72c4fca1b">LPS22_THS_P_L_REG</a>&#160;&#160;&#160;0x0C</td></tr>
+<tr class="memdesc:aeb0911f59324c4f44b228ea72c4fca1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pressure threshold value for int. <br /></td></tr>
+<tr class="separator:aeb0911f59324c4f44b228ea72c4fca1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2021da28fd93e82e7aff2a4cd194d444"><td class="memItemLeft" align="right" valign="top"><a id="a2021da28fd93e82e7aff2a4cd194d444"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a2021da28fd93e82e7aff2a4cd194d444">LPS22_CTRL_REG1</a>&#160;&#160;&#160;0x10</td></tr>
+<tr class="memdesc:a2021da28fd93e82e7aff2a4cd194d444"><td class="mdescLeft">&#160;</td><td class="mdescRight">First control register. Includes BD &amp; ODR. <br /></td></tr>
+<tr class="separator:a2021da28fd93e82e7aff2a4cd194d444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0670d09c4b1f0c59c39be0d6b3bbfa0"><td class="memItemLeft" align="right" valign="top"><a id="ab0670d09c4b1f0c59c39be0d6b3bbfa0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#ab0670d09c4b1f0c59c39be0d6b3bbfa0">LPS22_CTRL_REG2</a>&#160;&#160;&#160;0x11</td></tr>
+<tr class="memdesc:ab0670d09c4b1f0c59c39be0d6b3bbfa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second control register. Includes SW Reset. <br /></td></tr>
+<tr class="separator:ab0670d09c4b1f0c59c39be0d6b3bbfa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb3f54c700e063727e4bbd2c20268537"><td class="memItemLeft" align="right" valign="top"><a id="abb3f54c700e063727e4bbd2c20268537"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#abb3f54c700e063727e4bbd2c20268537">LPS22_CTRL_REG3</a>&#160;&#160;&#160;0x12</td></tr>
+<tr class="memdesc:abb3f54c700e063727e4bbd2c20268537"><td class="mdescLeft">&#160;</td><td class="mdescRight">Third control register. Includes interrupt polarity. <br /></td></tr>
+<tr class="separator:abb3f54c700e063727e4bbd2c20268537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67976fd74ab33ed8017eafa07ba15118"><td class="memItemLeft" align="right" valign="top"><a id="a67976fd74ab33ed8017eafa07ba15118"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a67976fd74ab33ed8017eafa07ba15118">LPS25HB_CHIP_ID</a>&#160;&#160;&#160;0xBD</td></tr>
+<tr class="memdesc:a67976fd74ab33ed8017eafa07ba15118"><td class="mdescLeft">&#160;</td><td class="mdescRight">LPS25HB default device id from WHOAMI. <br /></td></tr>
+<tr class="separator:a67976fd74ab33ed8017eafa07ba15118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41e9e36406142e090b76b0f3caebfda5"><td class="memItemLeft" align="right" valign="top"><a id="a41e9e36406142e090b76b0f3caebfda5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a41e9e36406142e090b76b0f3caebfda5">LPS25_CTRL_REG1</a>&#160;&#160;&#160;0x20</td></tr>
+<tr class="memdesc:a41e9e36406142e090b76b0f3caebfda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">First control register. Includes BD &amp; ODR. <br /></td></tr>
+<tr class="separator:a41e9e36406142e090b76b0f3caebfda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a656a41fa6e9080b581be94a384284420"><td class="memItemLeft" align="right" valign="top"><a id="a656a41fa6e9080b581be94a384284420"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a656a41fa6e9080b581be94a384284420">LPS25_CTRL_REG2</a>&#160;&#160;&#160;0x21</td></tr>
+<tr class="memdesc:a656a41fa6e9080b581be94a384284420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second control register. Includes SW Reset. <br /></td></tr>
+<tr class="separator:a656a41fa6e9080b581be94a384284420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a929324ff9c045cf2b68493694286fa5b"><td class="memItemLeft" align="right" valign="top"><a id="a929324ff9c045cf2b68493694286fa5b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a929324ff9c045cf2b68493694286fa5b">LPS25_CTRL_REG3</a>&#160;&#160;&#160;0x22</td></tr>
+<tr class="memdesc:a929324ff9c045cf2b68493694286fa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Third control register. Includes interrupt polarity. <br /></td></tr>
+<tr class="separator:a929324ff9c045cf2b68493694286fa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc4496b04e142dd544cbbe039a82d1b"><td class="memItemLeft" align="right" valign="top"><a id="a8bc4496b04e142dd544cbbe039a82d1b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a8bc4496b04e142dd544cbbe039a82d1b">LPS25_CTRL_REG4</a>&#160;&#160;&#160;0x23</td></tr>
+<tr class="memdesc:a8bc4496b04e142dd544cbbe039a82d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourth control register. Includes DRDY INT control. <br /></td></tr>
+<tr class="separator:a8bc4496b04e142dd544cbbe039a82d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d185aa65a1cedc41203b926df694c80"><td class="memItemLeft" align="right" valign="top"><a id="a3d185aa65a1cedc41203b926df694c80"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a3d185aa65a1cedc41203b926df694c80">LPS25_INTERRUPT_CFG</a>&#160;&#160;&#160;0x24</td></tr>
+<tr class="memdesc:a3d185aa65a1cedc41203b926df694c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt control register. <br /></td></tr>
+<tr class="separator:a3d185aa65a1cedc41203b926df694c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeecf45f1bc79fa364829e13ba600bece"><td class="memItemLeft" align="right" valign="top"><a id="aeecf45f1bc79fa364829e13ba600bece"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#aeecf45f1bc79fa364829e13ba600bece">LPS25_THS_P_L_REG</a>&#160;&#160;&#160;0xB0</td></tr>
+<tr class="memdesc:aeecf45f1bc79fa364829e13ba600bece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pressure threshold value for int. <br /></td></tr>
+<tr class="separator:aeecf45f1bc79fa364829e13ba600bece"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e75de68da8d1c53a40b1dea842c4ede"><td class="memItemLeft" align="right" valign="top"><a id="a0e75de68da8d1c53a40b1dea842c4ede"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#a0e75de68da8d1c53a40b1dea842c4ede">LPS2X_PRESS_OUT_XL</a>&#160;&#160;&#160;(0x28 | 0x80)</td></tr>
 <tr class="memdesc:a0e75de68da8d1c53a40b1dea842c4ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">| 0x80 to set auto increment on multi-byte read <br /></td></tr>
@@ -137,17 +157,29 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:adf1110a1bd3a6c4a4c00685cf128b53f"><td class="memItemLeft" align="right" valign="top"><a id="adf1110a1bd3a6c4a4c00685cf128b53f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#adf1110a1bd3a6c4a4c00685cf128b53f">lps2x_rate_t</a> { <br />
-&#160;&#160;<b>LPS2X_RATE_ONE_SHOT</b>, 
-<b>LPS2X_RATE_1_HZ</b>, 
-<b>LPS2X_RATE_7_HZ</b>, 
-<b>LPS2X_RATE_12_5_HZ</b>, 
+<tr class="memitem:abc69776211f965b86baade81b9fcdca4"><td class="memItemLeft" align="right" valign="top"><a id="abc69776211f965b86baade81b9fcdca4"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#abc69776211f965b86baade81b9fcdca4">lps25_rate_t</a> { <br />
+&#160;&#160;<b>LPS25_RATE_ONE_SHOT</b>, 
+<b>LPS25_RATE_1_HZ</b>, 
+<b>LPS25_RATE_7_HZ</b>, 
+<b>LPS25_RATE_12_5_HZ</b>, 
 <br />
-&#160;&#160;<b>LPS2X_RATE_25_HZ</b>
+&#160;&#160;<b>LPS25_RATE_25_HZ</b>
 <br />
- }<tr class="memdesc:adf1110a1bd3a6c4a4c00685cf128b53f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allowed values for <code>setDataRate</code>. <br /></td></tr>
+ }<tr class="memdesc:abc69776211f965b86baade81b9fcdca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allowed values for <code>setDataRate</code>. <br /></td></tr>
 </td></tr>
-<tr class="separator:adf1110a1bd3a6c4a4c00685cf128b53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:abc69776211f965b86baade81b9fcdca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5b92eb623d7cc4d67b74d645da502ee"><td class="memItemLeft" align="right" valign="top"><a id="af5b92eb623d7cc4d67b74d645da502ee"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___l_p_s2_x_8h.html#af5b92eb623d7cc4d67b74d645da502ee">lps22_rate_t</a> { <br />
+&#160;&#160;<b>LPS22_RATE_ONE_SHOT</b>, 
+<b>LPS22_RATE_1_HZ</b>, 
+<b>LPS22_RATE_10_HZ</b>, 
+<b>LPS22_RATE_25_HZ</b>, 
+<br />
+&#160;&#160;<b>LPS22_RATE_50_HZ</b>, 
+<b>LPS22_RATE_75_HZ</b>
+<br />
+ }<tr class="memdesc:af5b92eb623d7cc4d67b74d645da502ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allowed values for <code>setDataRate</code>. <br /></td></tr>
+</td></tr>
+<tr class="separator:af5b92eb623d7cc4d67b74d645da502ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>I2C Driver for the Library for the LPS2X family of barometric pressure sensors </p><pre class="fragment">This is a library for the Adafruit LPS2X breakout:

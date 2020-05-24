@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['adafruit_5flps22',['Adafruit_LPS22',['../class_adafruit___l_p_s22.html',1,'']]],
+  ['adafruit_5flps25',['Adafruit_LPS25',['../class_adafruit___l_p_s25.html',1,'']]],
   ['adafruit_5flps2x',['Adafruit_LPS2X',['../class_adafruit___l_p_s2_x.html',1,'Adafruit_LPS2X'],['../class_adafruit___l_p_s2_x.html#a430c605ed18c864be592509de4016de5',1,'Adafruit_LPS2X::Adafruit_LPS2X()']]],
   ['adafruit_5flps2x_2ecpp',['Adafruit_LPS2X.cpp',['../_adafruit___l_p_s2_x_8cpp.html',1,'']]],
   ['adafruit_5flps2x_2eh',['Adafruit_LPS2X.h',['../_adafruit___l_p_s2_x_8h.html',1,'']]],
