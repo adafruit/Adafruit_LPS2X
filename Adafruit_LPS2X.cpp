@@ -314,7 +314,6 @@ void Adafruit_LPS2X_Temp::getSensor(sensor_t *sensor) {
   sensor->min_delay = 0;
   sensor->min_value = -30;
   sensor->max_value = 105;
-  // 480 LSB = 1°C >> 1 LSB = 1/480°C >> 1 LSB =  0.00208 °C
   sensor->resolution = 0.00208;
 }
 
