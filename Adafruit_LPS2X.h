@@ -25,18 +25,23 @@
 #include <Wire.h>
 
 #define LPS2X_I2CADDR_DEFAULT 0x5D ///< LPS2X default i2c address
-#define LPS2X_CHIP_ID 0xB1         ///< LPS2X default device id from WHOAMI
-#define LPS25HB_CHIP_ID 0xBD       ///< LPS25HB default device id from WHOAMI
-
-#define LPS2X_EXAMPLE_REG 0x00 ///< Example register
 #define LPS2X_WHOAMI 0x0F      ///< Chip ID register
-#define LPS2X_CTRL_REG1 0x20   ///< First control register. Includes BD & ODR
-#define LPS2X_CTRL_REG2 0x21   ///< Second control register. Includes SW Reset
-#define LPS2X_CTRL_REG3                                                        \
+
+#define LPS22HB_CHIP_ID 0xB1       ///< LPS22 default device id from WHOAMI
+#define LPS22_CTRL_REG1 0x10   ///< First control register. Includes BD & ODR
+#define LPS22_CTRL_REG2 0x11   ///< Second control register. Includes SW Reset
+#define LPS22_CTRL_REG3                                                        \
+  0x12 ///< Third control register. Includes interrupt polarity
+
+
+#define LPS25HB_CHIP_ID 0xBD       ///< LPS25HB default device id from WHOAMI
+#define LPS25_CTRL_REG1 0x20   ///< First control register. Includes BD & ODR
+#define LPS25_CTRL_REG2 0x21   ///< Second control register. Includes SW Reset
+#define LPS25_CTRL_REG3                                                        \
   0x22 ///< Third control register. Includes interrupt polarity
-#define LPS2X_CTRL_REG4                                                        \
+#define LPS25_CTRL_REG4                                                        \
   0x23 ///< Fourth control register. Includes DRDY INT control
-#define LPS2X_INTERRUPT_CFG 0x24 ///< Interrupt control register
+#define LPS25_INTERRUPT_CFG 0x24 ///< Interrupt control register
 #define LPS2X_PRESS_OUT_XL                                                     \
   (0x28 | 0x80) ///< | 0x80 to set auto increment on multi-byte read
 #define LPS2X_TEMP_OUT_L (0x2B | 0x80) ///< | 0x80 to set auto increment on
@@ -47,12 +52,22 @@
  * Allowed values for `setDataRate`.
  */
 typedef enum {
-  LPS2X_RATE_ONE_SHOT,
-  LPS2X_RATE_1_HZ,
-  LPS2X_RATE_7_HZ,
-  LPS2X_RATE_12_5_HZ,
-  LPS2X_RATE_25_HZ,
-} lps2x_rate_t;
+  LPS25_RATE_ONE_SHOT,
+  LPS25_RATE_1_HZ,
+  LPS25_RATE_7_HZ,
+  LPS25_RATE_12_5_HZ,
+  LPS25_RATE_25_HZ,
+} lps25_rate_t;
+
+typedef enum {
+  LPS22_RATE_ONE_SHOT,
+  LPS22_RATE_1_HZ,
+  LPS22_RATE_10_HZ,
+  LPS22_RATE_25_HZ,
+  LPS22_RATE_50_HZ,
+  LPS22_RATE_75_HZ,
+} lps22_rate_t;
+
 
 class Adafruit_LPS2X;
 
@@ -85,6 +100,7 @@ private:
   Adafruit_LPS2X *_theLPS2X = NULL;
 };
 
+
 /*!
  *    @brief  Class that stores state and functions for interacting with
  *            the LPS2X I2C Barometric Pressure & Temperature Sensor
@@ -101,10 +117,7 @@ public:
                  int32_t sensor_id = 0);
   bool begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
                  int8_t mosi_pin, int32_t sensor_id = 0);
-  void powerDown(bool power_down);
-  lps2x_rate_t getDataRate(void);
 
-  void setDataRate(lps2x_rate_t data_rate);
   void interruptsActiveLow(bool active_low);
   bool getEvent(sensors_event_t *pressure, sensors_event_t *temp);
   void reset(void);
@@ -114,13 +127,14 @@ public:
 
 protected:
   void _read(void);
-  virtual bool _init(int32_t sensor_id);
+  virtual bool _init(int32_t sensor_id) = 0;
 
-  float unscaled_temp,   ///< Last reading's temperature (C) before scaling
-      unscaled_pressure; ///< Last reading's pressure (hPa) before scaling
+  float _temp,   ///< Last reading's temperature (C)
+      _pressure; ///< Last reading's pressure (hPa)
 
   uint16_t _sensorid_pressure, ///< ID number for pressure
       _sensorid_temp;          ///< ID number for temperature
+  float temp_scaling = 1;      ///< Different chips have different scalings
 
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
   Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
@@ -129,6 +143,9 @@ protected:
   Adafruit_LPS2X_Pressure *pressure_sensor =
       NULL; ///< Pressure sensor data object
 
+    Adafruit_BusIO_Register *ctrl1_reg = NULL;    ///< The first control register
+    Adafruit_BusIO_Register *ctrl2_reg = NULL;    ///< The second control register
+    Adafruit_BusIO_Register *ctrl3_reg = NULL;    ///< The third control register
 private:
   friend class Adafruit_LPS2X_Temp;     ///< Gives access to private members to
                                         ///< Temp data object
@@ -138,6 +155,28 @@ private:
 
   void fillPressureEvent(sensors_event_t *pressure, uint32_t timestamp);
   void fillTempEvent(sensors_event_t *temp, uint32_t timestamp);
+};
+
+
+
+class Adafruit_LPS25 : public Adafruit_LPS2X {
+ public:
+  lps25_rate_t getDataRate(void);
+  void setDataRate(lps25_rate_t data_rate);
+  void powerDown(bool power_down);
+
+ protected:
+  bool _init(int32_t sensor_id);
+};
+
+
+class Adafruit_LPS22 : public Adafruit_LPS2X {
+ public:
+  lps22_rate_t getDataRate(void);
+  void setDataRate(lps22_rate_t data_rate);
+
+ protected:
+  bool _init(int32_t sensor_id);
 };
 
 #endif

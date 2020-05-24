@@ -135,45 +135,14 @@ bool Adafruit_LPS2X::begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
   return _init(sensor_id);
 }
 
-/*!  @brief Initializer for post i2c/spi init
- *   @param sensor_id Optional unique ID for the sensor set
- *   @returns True if chip identified and initialized
- */
-bool Adafruit_LPS2X::_init(int32_t sensor_id) {
-
-  Adafruit_BusIO_Register chip_id = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_WHOAMI, 1);
-
-  // make sure we're talking to the right chip
-  uint8_t id = chip_id.read();
-
-  if ((id != LPS2X_CHIP_ID) && (id != LPS25HB_CHIP_ID)) {
-    return false;
-  }
-  _sensorid_pressure = sensor_id;
-  _sensorid_temp = sensor_id + 1;
-
-  reset();
-  // do any software reset or other initial setup
-  powerDown(false);
-  setDataRate(LPS2X_RATE_25_HZ);
-
-  pressure_sensor = new Adafruit_LPS2X_Pressure(this);
-  temp_sensor = new Adafruit_LPS2X_Temp(this);
-  delay(10); // delay for first reading
-  return true;
-}
-
 /**
  * @brief Performs a software reset initializing registers to their power on
  * state
  *
  */
 void Adafruit_LPS2X::reset(void) {
-  Adafruit_BusIO_Register ctrl_2 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG2, 1);
   Adafruit_BusIO_RegisterBits sw_reset =
-      Adafruit_BusIO_RegisterBits(&ctrl_2, 1, 2);
+      Adafruit_BusIO_RegisterBits(ctrl2_reg, 1, 2);
 
   sw_reset.write(1);
   while (sw_reset.read()) {
@@ -181,45 +150,6 @@ void Adafruit_LPS2X::reset(void) {
   }
 }
 
-/**
- * @brief Puts the sensor into power down mode, shutting the sensor down
- *
- * @param power_down
- */
-void Adafruit_LPS2X::powerDown(bool power_down) {
-  Adafruit_BusIO_Register ctrl_1 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG1, 1);
-  Adafruit_BusIO_RegisterBits pd = Adafruit_BusIO_RegisterBits(&ctrl_1, 1, 7);
-  pd.write(!power_down); // pd bit->0 == power down
-}
-
-/**
- * @brief Gets the current rate at which pressure and temperature measurements
- * are taken
- *
- * @return lps2x_rate_t The current data rate
- */
-lps2x_rate_t Adafruit_LPS2X::getDataRate(void) {
-  Adafruit_BusIO_Register ctrl1 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG1, 1);
-  Adafruit_BusIO_RegisterBits data_rate =
-      Adafruit_BusIO_RegisterBits(&ctrl1, 3, 4);
-
-  return (lps2x_rate_t)data_rate.read();
-}
-/**
- * @brief Sets the rate at which pressure and temperature measurements
- *
- * @param new_data_rate The data rate to set. Must be a `lps2x_rate_t`
- */
-void Adafruit_LPS2X::setDataRate(lps2x_rate_t new_data_rate) {
-  Adafruit_BusIO_Register ctrl1 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG1, 1);
-  Adafruit_BusIO_RegisterBits data_rate =
-      Adafruit_BusIO_RegisterBits(&ctrl1, 3, 4);
-
-  data_rate.write((uint8_t)new_data_rate);
-}
 
 /******************* Adafruit_Sensor functions *****************/
 /*!
@@ -263,12 +193,12 @@ void Adafruit_LPS2X::_read(void) {
   if (raw_temp & 0x8000) {
     raw_temp = raw_temp - 0xFFFF;
   }
-  unscaled_temp = raw_temp;
+  _temp = raw_temp / temp_scaling;
 
   if (raw_pressure & 0x800000) {
     raw_pressure = raw_pressure - 0xFFFFFF;
   }
-  unscaled_pressure = raw_pressure;
+  _pressure = raw_pressure / 4096.0;
 }
 
 /*!
@@ -315,7 +245,7 @@ void Adafruit_LPS2X::fillPressureEvent(sensors_event_t *pressure,
   pressure->sensor_id = _sensorid_pressure;
   pressure->type = SENSOR_TYPE_PRESSURE;
   pressure->timestamp = timestamp;
-  pressure->pressure = (unscaled_pressure / 4096.0);
+  pressure->pressure = _pressure;
 }
 
 void Adafruit_LPS2X::fillTempEvent(sensors_event_t *temp, uint32_t timestamp) {
@@ -324,7 +254,7 @@ void Adafruit_LPS2X::fillTempEvent(sensors_event_t *temp, uint32_t timestamp) {
   temp->sensor_id = _sensorid_temp;
   temp->type = SENSOR_TYPE_AMBIENT_TEMPERATURE;
   temp->timestamp = timestamp;
-  temp->temperature = (unscaled_temp / 480) + 42.5;
+  temp->temperature = _temp;
 }
 
 /**************************************************************************/
@@ -381,7 +311,7 @@ void Adafruit_LPS2X_Temp::getSensor(sensor_t *sensor) {
   sensor->min_delay = 0;
   sensor->min_value = -30;
   sensor->max_value = 105;
-  // 480 LSB = 1Â°C >> 1 LSB = 1/480Â°C >> 1 LSB =  0.00208 Â°C
+  // 480 LSB = 1°C >> 1 LSB = 1/480°C >> 1 LSB =  0.00208 °C
   sensor->resolution = 0.00208;
 }
 
@@ -404,10 +334,7 @@ bool Adafruit_LPS2X_Temp::getEvent(sensors_event_t *event) {
  * @param active_low Set to true to make the pin active low
  */
 void Adafruit_LPS2X::interruptsActiveLow(bool active_low) {
-  Adafruit_BusIO_Register ctrl3 = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS2X_CTRL_REG3, 1);
-
   Adafruit_BusIO_RegisterBits active_low_bit =
-      Adafruit_BusIO_RegisterBits(&ctrl3, 1, 7);
+      Adafruit_BusIO_RegisterBits(ctrl3_reg, 1, 7);
   active_low_bit.write(active_low);
 }
