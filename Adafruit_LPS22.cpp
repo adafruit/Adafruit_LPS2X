@@ -1,6 +1,5 @@
 #include <Adafruit_LPS2X.h>
 
-
 /*!  @brief Initializer for post i2c/spi init
  *   @param sensor_id Optional unique ID for the sensor set
  *   @returns True if chip identified and initialized
@@ -43,7 +42,6 @@ bool Adafruit_LPS22::_init(int32_t sensor_id) {
   return true;
 }
 
-
 /**
  * @brief Sets the rate at which pressure and temperature measurements
  *
@@ -55,7 +53,6 @@ void Adafruit_LPS22::setDataRate(lps22_rate_t new_data_rate) {
 
   data_rate.write((uint8_t)new_data_rate);
 }
-
 
 /**
  * @brief Gets the current rate at which pressure and temperature measurements
@@ -70,12 +67,13 @@ lps22_rate_t Adafruit_LPS22::getDataRate(void) {
   return (lps22_rate_t)data_rate.read();
 }
 
-
 void Adafruit_LPS22::configureInterrupt(bool activelow, bool opendrain,
                                         bool data_ready, bool pres_high,
-                                        bool pres_low, bool fifo_full, 
-                                        bool fifo_watermark, bool fifo_overflow) {
+                                        bool pres_low, bool fifo_full,
+                                        bool fifo_watermark,
+                                        bool fifo_overflow) {
   uint8_t reg = (activelow << 7) | (opendrain << 6) | (fifo_full << 5) |
-    (fifo_watermark << 4) | (fifo_overflow << 3) | (data_ready << 2);
+                (fifo_watermark << 4) | (fifo_overflow << 3) |
+                (data_ready << 2);
   ctrl3_reg->write(reg);
 }

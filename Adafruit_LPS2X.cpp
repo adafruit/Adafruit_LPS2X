@@ -154,7 +154,6 @@ void Adafruit_LPS2X::setPresThreshold(uint16_t hPa_delta) {
   threshp_reg->write(hPa_delta);
 }
 
-
 /******************* Adafruit_Sensor functions *****************/
 /*!
  *     @brief  Updates the measurement data for all sensors simultaneously
@@ -332,4 +331,3 @@ bool Adafruit_LPS2X_Temp::getEvent(sensors_event_t *event) {
 
   return true;
 }
-

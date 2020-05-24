@@ -1,6 +1,5 @@
 #include <Adafruit_LPS2X.h>
 
-
 /*!  @brief Initializer for post i2c/spi init
  *   @param sensor_id Optional unique ID for the sensor set
  *   @returns True if chip identified and initialized
@@ -42,7 +41,6 @@ bool Adafruit_LPS25::_init(int32_t sensor_id) {
   return true;
 }
 
-
 /**
  * @brief Sets the rate at which pressure and temperature measurements
  *
@@ -56,7 +54,6 @@ void Adafruit_LPS25::setDataRate(lps25_rate_t new_data_rate) {
 
   data_rate.write((uint8_t)new_data_rate);
 }
-
 
 /**
  * @brief Gets the current rate at which pressure and temperature measurements
@@ -73,7 +70,6 @@ lps25_rate_t Adafruit_LPS25::getDataRate(void) {
   return (lps25_rate_t)data_rate.read();
 }
 
-
 /**
  * @brief Puts the sensor into power down mode, shutting the sensor down
  *
@@ -84,11 +80,9 @@ void Adafruit_LPS25::powerDown(bool power_down) {
   pd.write(!power_down); // pd bit->0 == power down
 }
 
-
-
 void Adafruit_LPS25::configureInterrupt(bool activelow, bool opendrain,
                                         bool pres_high, bool pres_low) {
-  uint8_t reg = (activelow << 7) | (opendrain << 6) | 
-    (pres_low << 1) | pres_high;
+  uint8_t reg =
+      (activelow << 7) | (opendrain << 6) | (pres_low << 1) | pres_high;
   ctrl3_reg->write(reg);
 }
