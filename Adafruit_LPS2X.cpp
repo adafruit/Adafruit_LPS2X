@@ -150,6 +150,10 @@ void Adafruit_LPS2X::reset(void) {
   }
 }
 
+void Adafruit_LPS2X::setPresThreshold(uint16_t hPa_delta) {
+  threshp_reg->write(hPa_delta);
+}
+
 
 /******************* Adafruit_Sensor functions *****************/
 /*!
@@ -161,9 +165,9 @@ void Adafruit_LPS2X::_read(void) {
   uint8_t pressure_addr = LPS2X_PRESS_OUT_XL;
   uint8_t temp_addr = LPS2X_TEMP_OUT_L;
   if (spi_dev) {
-    // for LPS2X SPI, addr[7] is r/w, addr[6] is auto increment
-    pressure_addr |= 0x40;
-    temp_addr |= 0x40;
+    // for LPS25 SPI, addr[7] is r/w, addr[6] is auto increment
+    pressure_addr |= inc_spi_flag;
+    temp_addr |= inc_spi_flag;
   }
 
   Adafruit_BusIO_Register pressure_data = Adafruit_BusIO_Register(
@@ -328,13 +332,4 @@ bool Adafruit_LPS2X_Temp::getEvent(sensors_event_t *event) {
 
   return true;
 }
-/**
- * @brief Sets the polarity of the INT pin.
- *
- * @param active_low Set to true to make the pin active low
- */
-void Adafruit_LPS2X::interruptsActiveLow(bool active_low) {
-  Adafruit_BusIO_RegisterBits active_low_bit =
-      Adafruit_BusIO_RegisterBits(ctrl3_reg, 1, 7);
-  active_low_bit.write(active_low);
-}
+

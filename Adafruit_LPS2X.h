@@ -28,11 +28,11 @@
 #define LPS2X_WHOAMI 0x0F      ///< Chip ID register
 
 #define LPS22HB_CHIP_ID 0xB1       ///< LPS22 default device id from WHOAMI
+#define LPS22_THS_P_L_REG 0x0C  ///< Pressure threshold value for int
 #define LPS22_CTRL_REG1 0x10   ///< First control register. Includes BD & ODR
 #define LPS22_CTRL_REG2 0x11   ///< Second control register. Includes SW Reset
 #define LPS22_CTRL_REG3                                                        \
   0x12 ///< Third control register. Includes interrupt polarity
-
 
 #define LPS25HB_CHIP_ID 0xBD       ///< LPS25HB default device id from WHOAMI
 #define LPS25_CTRL_REG1 0x20   ///< First control register. Includes BD & ODR
@@ -42,6 +42,10 @@
 #define LPS25_CTRL_REG4                                                        \
   0x23 ///< Fourth control register. Includes DRDY INT control
 #define LPS25_INTERRUPT_CFG 0x24 ///< Interrupt control register
+#define LPS25_THS_P_L_REG 0xB0  ///< Pressure threshold value for int
+
+
+
 #define LPS2X_PRESS_OUT_XL                                                     \
   (0x28 | 0x80) ///< | 0x80 to set auto increment on multi-byte read
 #define LPS2X_TEMP_OUT_L (0x2B | 0x80) ///< | 0x80 to set auto increment on
@@ -118,7 +122,7 @@ public:
   bool begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
                  int8_t mosi_pin, int32_t sensor_id = 0);
 
-  void interruptsActiveLow(bool active_low);
+  void setPresThreshold(uint16_t hPa_delta);
   bool getEvent(sensors_event_t *pressure, sensors_event_t *temp);
   void reset(void);
 
@@ -135,6 +139,7 @@ protected:
   uint16_t _sensorid_pressure, ///< ID number for pressure
       _sensorid_temp;          ///< ID number for temperature
   float temp_scaling = 1;      ///< Different chips have different scalings
+    uint8_t inc_spi_flag = 0;
 
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
   Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
@@ -146,6 +151,8 @@ protected:
     Adafruit_BusIO_Register *ctrl1_reg = NULL;    ///< The first control register
     Adafruit_BusIO_Register *ctrl2_reg = NULL;    ///< The second control register
     Adafruit_BusIO_Register *ctrl3_reg = NULL;    ///< The third control register
+    Adafruit_BusIO_Register *threshp_reg = NULL;  ///< Pressure threshold
+
 private:
   friend class Adafruit_LPS2X_Temp;     ///< Gives access to private members to
                                         ///< Temp data object
@@ -164,6 +171,8 @@ class Adafruit_LPS25 : public Adafruit_LPS2X {
   lps25_rate_t getDataRate(void);
   void setDataRate(lps25_rate_t data_rate);
   void powerDown(bool power_down);
+  void configureInterrupt(bool activelow, bool opendrain,
+                          bool pres_high=false, bool pres_low=false);
 
  protected:
   bool _init(int32_t sensor_id);
@@ -174,7 +183,10 @@ class Adafruit_LPS22 : public Adafruit_LPS2X {
  public:
   lps22_rate_t getDataRate(void);
   void setDataRate(lps22_rate_t data_rate);
-
+  void configureInterrupt(bool activelow, bool opendrain,
+                          bool data_ready, bool pres_high=false,
+                          bool pres_low=false, bool fifo_full=false, 
+                          bool fifo_watermark=false, bool fifo_overflow=false);
  protected:
   bool _init(int32_t sensor_id);
 };

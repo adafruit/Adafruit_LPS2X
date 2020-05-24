@@ -27,13 +27,18 @@ bool Adafruit_LPS22::_init(int32_t sensor_id) {
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS22_CTRL_REG2, 1);
   ctrl3_reg = new Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS22_CTRL_REG3, 1);
+  threshp_reg = new Adafruit_BusIO_Register(
+      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS22_THS_P_L_REG, 1);
 
   reset();
   // do any software reset or other initial setup
   setDataRate(LPS22_RATE_25_HZ);
+  // interrupt on data ready
+  configureInterrupt(true, false, true);
 
   pressure_sensor = new Adafruit_LPS2X_Pressure(this);
   temp_sensor = new Adafruit_LPS2X_Temp(this);
+
   delay(10); // delay for first reading
   return true;
 }
@@ -63,4 +68,14 @@ lps22_rate_t Adafruit_LPS22::getDataRate(void) {
       Adafruit_BusIO_RegisterBits(ctrl1_reg, 3, 4);
 
   return (lps22_rate_t)data_rate.read();
+}
+
+
+void Adafruit_LPS22::configureInterrupt(bool activelow, bool opendrain,
+                                        bool data_ready, bool pres_high,
+                                        bool pres_low, bool fifo_full, 
+                                        bool fifo_watermark, bool fifo_overflow) {
+  uint8_t reg = (activelow << 7) | (opendrain << 6) | (fifo_full << 5) |
+    (fifo_watermark << 4) | (fifo_overflow << 3) | (data_ready << 2);
+  ctrl3_reg->write(reg);
 }

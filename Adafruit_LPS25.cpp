@@ -20,6 +20,7 @@ bool Adafruit_LPS25::_init(int32_t sensor_id) {
   _sensorid_temp = sensor_id + 1;
 
   temp_scaling = 480;
+  inc_spi_flag = 0x40;
 
   ctrl1_reg = new Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS25_CTRL_REG1, 1);
@@ -27,6 +28,8 @@ bool Adafruit_LPS25::_init(int32_t sensor_id) {
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS25_CTRL_REG2, 1);
   ctrl3_reg = new Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS25_CTRL_REG3, 1);
+  threshp_reg = new Adafruit_BusIO_Register(
+      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS25_THS_P_L_REG, 1);
 
   reset();
   // do any software reset or other initial setup
@@ -79,4 +82,13 @@ lps25_rate_t Adafruit_LPS25::getDataRate(void) {
 void Adafruit_LPS25::powerDown(bool power_down) {
   Adafruit_BusIO_RegisterBits pd = Adafruit_BusIO_RegisterBits(ctrl1_reg, 1, 7);
   pd.write(!power_down); // pd bit->0 == power down
+}
+
+
+
+void Adafruit_LPS25::configureInterrupt(bool activelow, bool opendrain,
+                                        bool pres_high, bool pres_low) {
+  uint8_t reg = (activelow << 7) | (opendrain << 6) | 
+    (pres_low << 1) | pres_high;
+  ctrl3_reg->write(reg);
 }
