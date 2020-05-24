@@ -61,6 +61,11 @@ typedef enum {
   LPS25_RATE_25_HZ,
 } lps25_rate_t;
 
+/**
+ * @brief
+ *
+ * Allowed values for `setDataRate`.
+ */
 typedef enum {
   LPS22_RATE_ONE_SHOT,
   LPS22_RATE_1_HZ,
@@ -126,8 +131,12 @@ public:
   Adafruit_Sensor *getPressureSensor(void);
 
 protected:
-  void _read(void);
+  /**! @brief The subclasses' hardware initialization function
+     @param sensor_id The unique sensor id we want to assign it
+     @returns True on success, false if something went wrong! **/
   virtual bool _init(int32_t sensor_id) = 0;
+
+  void _read(void);
 
   float _temp,   ///< Last reading's temperature (C)
       _pressure; ///< Last reading's pressure (hPa)
@@ -135,7 +144,8 @@ protected:
   uint16_t _sensorid_pressure, ///< ID number for pressure
       _sensorid_temp;          ///< ID number for temperature
   float temp_scaling = 1;      ///< Different chips have different scalings
-  uint8_t inc_spi_flag = 0;
+  uint8_t inc_spi_flag =
+      0; ///< If this chip has a bitflag for incrementing SPI registers
 
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
   Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
@@ -160,6 +170,7 @@ private:
   void fillTempEvent(sensors_event_t *temp, uint32_t timestamp);
 };
 
+/** Specific subclass for LPS25 variant */
 class Adafruit_LPS25 : public Adafruit_LPS2X {
 public:
   lps25_rate_t getDataRate(void);
@@ -172,6 +183,7 @@ protected:
   bool _init(int32_t sensor_id);
 };
 
+/** Specific subclass for LPS22 variant */
 class Adafruit_LPS22 : public Adafruit_LPS2X {
 public:
   lps22_rate_t getDataRate(void);

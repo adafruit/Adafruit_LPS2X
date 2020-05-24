@@ -138,7 +138,6 @@ bool Adafruit_LPS2X::begin_SPI(int8_t cs_pin, int8_t sck_pin, int8_t miso_pin,
 /**
  * @brief Performs a software reset initializing registers to their power on
  * state
- *
  */
 void Adafruit_LPS2X::reset(void) {
   Adafruit_BusIO_RegisterBits sw_reset =
@@ -150,6 +149,11 @@ void Adafruit_LPS2X::reset(void) {
   }
 }
 
+/**
+ * @brief Set the pressure threshold register for interrupt levels
+ * @param hPa_delta The u16 that will be written to the register, check the
+ * datasheet for more info on the format of this value!
+ */
 void Adafruit_LPS2X::setPresThreshold(uint16_t hPa_delta) {
   threshp_reg->write(hPa_delta);
 }
@@ -263,6 +267,7 @@ void Adafruit_LPS2X::fillTempEvent(sensors_event_t *temp, uint32_t timestamp) {
 /**************************************************************************/
 /*!
     @brief  Gets the sensor_t data for the LPS2X's tenperature
+    @param  sensor The allocated sensor_t that we will fill!
 */
 /**************************************************************************/
 void Adafruit_LPS2X_Pressure::getSensor(sensor_t *sensor) {
@@ -299,6 +304,7 @@ bool Adafruit_LPS2X_Pressure::getEvent(sensors_event_t *event) {
 /**************************************************************************/
 /*!
     @brief  Gets the sensor_t data for the LPS2X's tenperature
+    @param  sensor The allocated sensor_t that we will fill!
 */
 /**************************************************************************/
 void Adafruit_LPS2X_Temp::getSensor(sensor_t *sensor) {

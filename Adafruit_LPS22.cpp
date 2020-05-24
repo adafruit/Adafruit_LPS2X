@@ -67,6 +67,17 @@ lps22_rate_t Adafruit_LPS22::getDataRate(void) {
   return (lps22_rate_t)data_rate.read();
 }
 
+/**
+ * @brief Configures the INT pin
+ * @param activelow Pass true to make the INT pin drop low on interrupt
+ * @param opendrain Pass true to make the INT pin an open drain output
+ * @param data_ready If true, interrupt fires on new data ready
+ * @param pres_high If true, interrupt fires on high threshold pass
+ * @param pres_low If true, interrupt fires on low threshold pass
+ * @param fifo_full If true, interrupt fires on fifo full
+ * @param fifo_watermark If true, interrupt fires on fifo watermark pass
+ * @param fifo_overflow If true, interrupt fires on fifo overflow
+ */
 void Adafruit_LPS22::configureInterrupt(bool activelow, bool opendrain,
                                         bool data_ready, bool pres_high,
                                         bool pres_low, bool fifo_full,

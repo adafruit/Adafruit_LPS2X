@@ -80,6 +80,13 @@ void Adafruit_LPS25::powerDown(bool power_down) {
   pd.write(!power_down); // pd bit->0 == power down
 }
 
+/**
+ * @brief Configures the INT pin, by default it will output DRDY signal
+ * @param activelow Pass true to make the INT pin drop low on interrupt
+ * @param opendrain Pass true to make the INT pin an open drain output
+ * @param pres_high If true, interrupt fires on high threshold pass
+ * @param pres_low If true, interrupt fires on low threshold pass
+ */
 void Adafruit_LPS25::configureInterrupt(bool activelow, bool opendrain,
                                         bool pres_high, bool pres_low) {
   uint8_t reg =
