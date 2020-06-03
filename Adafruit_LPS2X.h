@@ -144,6 +144,7 @@ protected:
   uint16_t _sensorid_pressure, ///< ID number for pressure
       _sensorid_temp;          ///< ID number for temperature
   float temp_scaling = 1;      ///< Different chips have different scalings
+  float temp_offset = 1;       ///< Different chips have different offsets
   uint8_t inc_spi_flag =
       0; ///< If this chip has a bitflag for incrementing SPI registers
 

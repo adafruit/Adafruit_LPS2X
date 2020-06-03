@@ -19,6 +19,7 @@ bool Adafruit_LPS22::_init(int32_t sensor_id) {
   _sensorid_temp = sensor_id + 1;
 
   temp_scaling = 100;
+  temp_offset = 0;
 
   ctrl1_reg = new Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LPS22_CTRL_REG1, 1);
