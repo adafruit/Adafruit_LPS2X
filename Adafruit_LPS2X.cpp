@@ -200,7 +200,7 @@ void Adafruit_LPS2X::_read(void) {
   if (raw_temp & 0x8000) {
     raw_temp = raw_temp - 0xFFFF;
   }
-  _temp = raw_temp / temp_scaling;
+  _temp = (raw_temp / temp_scaling) + temp_offset;
 
   if (raw_pressure & 0x800000) {
     raw_pressure = raw_pressure - 0xFFFFFF;

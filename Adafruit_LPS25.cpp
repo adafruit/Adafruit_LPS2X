@@ -19,6 +19,7 @@ bool Adafruit_LPS25::_init(int32_t sensor_id) {
   _sensorid_temp = sensor_id + 1;
 
   temp_scaling = 480;
+  temp_offset = 42.5;
   inc_spi_flag = 0x40;
 
   ctrl1_reg = new Adafruit_BusIO_Register(
