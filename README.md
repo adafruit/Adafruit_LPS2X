@@ -1,9 +1,12 @@
-# Adafruit LPS2X [![Build Status](https://github.com/adafruit/Adafruit_LPS2X/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_LPS2X/actions)
+# Adafruit LPS2X [![Build Status](https://github.com/adafruit/Adafruit_LPS2X/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_LPS2X/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit_LPS2X/html/index.html)
+
 
 This is the Library for the LPS2X family of barometric pressure sensors for Arduino
 
 Tested and works great with the Adafruit LPS2X Breakout Board
+
 [<img src="assets/board.png?raw=true" width="500px">](https://www.adafruit.com/products/4530)
+
 This chip uses I2C to communicate, 2 pins are required to interface
 
 Adafruit invests time and resources providing this open source code, please support Adafruit and open-source hardware by purchasing products from Adafruit!
