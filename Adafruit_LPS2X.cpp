@@ -175,7 +175,6 @@ void Adafruit_LPS2X::_read(void) {
 
   // for one-shot mode, must manually initiate a reading
   if (isOneShot) {
-    Serial.println("one shot");
     Adafruit_BusIO_RegisterBits oneshot_bit =
         Adafruit_BusIO_RegisterBits(ctrl2_reg, 1, 0);
     oneshot_bit.write(1); // initiate reading
