@@ -54,6 +54,8 @@ void Adafruit_LPS25::setDataRate(lps25_rate_t new_data_rate) {
       Adafruit_BusIO_RegisterBits(&ctrl1, 3, 4);
 
   data_rate.write((uint8_t)new_data_rate);
+
+  isOneShot = (new_data_rate == LPS22_RATE_ONE_SHOT) ? true : false;
 }
 
 /**

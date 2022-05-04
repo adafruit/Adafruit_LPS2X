@@ -173,6 +173,15 @@ void Adafruit_LPS2X::_read(void) {
     temp_addr |= inc_spi_flag;
   }
 
+  // for one-shot mode, must manually initiate a reading
+  if (isOneShot) {
+    Adafruit_BusIO_RegisterBits oneshot_bit =
+        Adafruit_BusIO_RegisterBits(ctrl2_reg, 1, 0);
+    oneshot_bit.write(1); // initiate reading
+    while (oneshot_bit.read())
+      delay(1); // wait for completion
+  }
+
   Adafruit_BusIO_Register pressure_data = Adafruit_BusIO_Register(
       i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, pressure_addr, 3);
 

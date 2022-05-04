@@ -147,6 +147,7 @@ protected:
   float temp_offset = 1;       ///< Different chips have different offsets
   uint8_t inc_spi_flag =
       0; ///< If this chip has a bitflag for incrementing SPI registers
+  bool isOneShot = false; ///< true if data rate is one-shot
 
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
   Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
