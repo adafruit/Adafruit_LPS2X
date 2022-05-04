@@ -179,7 +179,7 @@ void Adafruit_LPS2X::_read(void) {
         Adafruit_BusIO_RegisterBits(ctrl2_reg, 1, 0);
     oneshot_bit.write(1); // initiate reading
     while (oneshot_bit.read())
-      delay(1); // wait for completon
+      delay(1); // wait for completion
   }
 
   Adafruit_BusIO_Register pressure_data = Adafruit_BusIO_Register(
