@@ -193,7 +193,7 @@ void Adafruit_LPS2X::_read(void) {
   temp_data.read(buffer, 2);
   int16_t raw_temp;
 
-  raw_temp |= (int16_t)(buffer[1]);
+  raw_temp = (int16_t)(buffer[1]);
   raw_temp <<= 8;
   raw_temp |= (int16_t)(buffer[0]);
 
