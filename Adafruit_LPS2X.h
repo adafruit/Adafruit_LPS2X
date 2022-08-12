@@ -113,7 +113,7 @@ private:
 class Adafruit_LPS2X {
 public:
   Adafruit_LPS2X();
-  ~Adafruit_LPS2X();
+  virtual ~Adafruit_LPS2X() = 0;
 
   bool begin_I2C(uint8_t i2c_addr = LPS2X_I2CADDR_DEFAULT,
                  TwoWire *wire = &Wire, int32_t sensor_id = 0);
@@ -175,6 +175,7 @@ private:
 /** Specific subclass for LPS25 variant */
 class Adafruit_LPS25 : public Adafruit_LPS2X {
 public:
+  ~Adafruit_LPS25();
   lps25_rate_t getDataRate(void);
   void setDataRate(lps25_rate_t data_rate);
   void powerDown(bool power_down);
@@ -188,6 +189,7 @@ protected:
 /** Specific subclass for LPS22 variant */
 class Adafruit_LPS22 : public Adafruit_LPS2X {
 public:
+  ~Adafruit_LPS22();
   lps22_rate_t getDataRate(void);
   void setDataRate(lps22_rate_t data_rate);
   void configureInterrupt(bool activelow, bool opendrain, bool data_ready,

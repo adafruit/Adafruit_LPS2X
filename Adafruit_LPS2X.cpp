@@ -44,16 +44,6 @@
  *
  */
 Adafruit_LPS2X::Adafruit_LPS2X(void) {}
-/**
- * @brief Destroy the Adafruit_LPS2X::Adafruit_LPS2X object
- *
- */
-Adafruit_LPS2X::~Adafruit_LPS2X(void) {
-  if (temp_sensor)
-    delete temp_sensor;
-  if (pressure_sensor)
-    delete pressure_sensor;
-}
 
 /*!
  *    @brief  Sets up the hardware and initializes I2C

@@ -1,5 +1,16 @@
 #include <Adafruit_LPS2X.h>
 
+/**
+ * @brief Destroy the Adafruit_LPS22::Adafruit_LPS22 object
+ *
+ */
+Adafruit_LPS22::~Adafruit_LPS22(void) {
+  if (temp_sensor)
+    delete temp_sensor;
+  if (pressure_sensor)
+    delete pressure_sensor;
+}
+
 /*!  @brief Initializer for post i2c/spi init
  *   @param sensor_id Optional unique ID for the sensor set
  *   @returns True if chip identified and initialized
