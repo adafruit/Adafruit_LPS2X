@@ -113,7 +113,7 @@ private:
 class Adafruit_LPS2X {
 public:
   Adafruit_LPS2X();
-  virtual ~Adafruit_LPS2X() = 0;
+  virtual ~Adafruit_LPS2X() {};
 
   bool begin_I2C(uint8_t i2c_addr = LPS2X_I2CADDR_DEFAULT,
                  TwoWire *wire = &Wire, int32_t sensor_id = 0);
