@@ -99,6 +99,6 @@ void Adafruit_LPS22::configureInterrupt(bool activelow, bool opendrain,
                                         bool fifo_overflow) {
   uint8_t reg = (activelow << 7) | (opendrain << 6) | (fifo_full << 5) |
                 (fifo_watermark << 4) | (fifo_overflow << 3) |
-                (data_ready << 2);
+                (data_ready << 2) | (pres_low << 1) | (pres_high);
   ctrl3_reg->write(reg);
 }
