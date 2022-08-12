@@ -35,7 +35,7 @@ void setup(void) {
     case LPS22_RATE_10_HZ: Serial.println("10 Hz"); break;
     case LPS22_RATE_25_HZ: Serial.println("25 Hz"); break;
     case LPS22_RATE_50_HZ: Serial.println("50 Hz"); break;
-
+    case LPS22_RATE_75_HZ: Serial.println("75 Hz"); break;
   }
 }
 
